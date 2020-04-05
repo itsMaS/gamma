@@ -24,6 +24,33 @@ public class KitchenAction : PersonAction
         }
     }
 
+    public override void ActionFinished()
+    {
+        base.ActionFinished();
+        switch (actionType)
+        {
+            case Type.WashDishes:
+                room.dishesWashed = true;
+                break;
+            case Type.EatMeal:
+                room.dishesWashed = false;
+                break;
+            case Type.EatIngredients:
+                room.ConsumeIngredients();
+                break;
+            case Type.PrepareMeal:
+                room.meals++;
+                room.ingredients -= mealCost;
+                break;
+            case Type.AddIngredients:
+                room.AddIngredients((currentInteractable as FoodIngredient).nutritionValue);
+                Destroy(currentInteractable.gameObject);
+                break;
+            default:
+                break;
+        }
+    }
+
     public override bool Doable(AreaInteractable interactable, out string message)
     {
         switch (actionType)
@@ -85,12 +112,12 @@ public class KitchenAction : PersonAction
                             return false;
                         }
 
-                        message = string.Format($"<color={GameAction.okColor}>+{ingredient.nutritionValue-waste} Food ingredients.");
+                        message = string.Format($"<color={GameAction.okColor}>+{ingredient.nutritionValue-waste} ingredients.");
                         message += string.Format($"<color={GameAction.errorColor}> \n -{waste} Wasted");
                     }
                     else
                     {
-                        message = string.Format($"<color={GameAction.okColor}>+{ingredient.nutritionValue} Food ingredients.");
+                        message = string.Format($"<color={GameAction.okColor}>+{ingredient.nutritionValue} food ingredients.");
                     }
                     return true;
                 }
@@ -102,27 +129,6 @@ public class KitchenAction : PersonAction
     }
     public override void Interact(AreaInteractable interactable)
     {
-        switch (actionType)
-        {
-            case Type.WashDishes:
-                room.dishesWashed = true;
-                break;
-            case Type.EatMeal:
-                room.dishesWashed = false;
-                break;
-            case Type.EatIngredients:
-                room.ConsumeIngredients();
-                break;
-            case Type.PrepareMeal:
-                room.meals++;
-                room.ingredients -= mealCost;
-                break;
-            case Type.AddIngredients:
-                room.AddIngredients((interactable as FoodIngredient).nutritionValue);
-                break;
-            default:
-                break;
-        }
         base.Interact(interactable);
     }
 }

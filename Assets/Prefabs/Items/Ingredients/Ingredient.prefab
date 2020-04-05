@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 609626693954973037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 26, y: 5.3, z: 0}
-  m_LocalScale: {x: 8.9424, y: 8.9424, z: 8.9424}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -541045963
-  m_SortingLayer: 5
-  m_SortingOrder: 10
+  m_SortingLayerID: -816846131
+  m_SortingLayer: 6
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5043ba511358c594abc58e85c3c613c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,7 +100,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 1
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -144,7 +144,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -541045963
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Time: 0.1
   m_Parameters:
@@ -226,7 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoveredOver: 0
   pickedUp: 0
-  dragOnPicked: 2
+  followSpeed: 0.05
+  dragOnPicked: 0
   dragNormal: 0
   ActionGroups:
   - {fileID: 11400000, guid: 3c582d47e18311943b5129fe7358e510, type: 2}

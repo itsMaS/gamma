@@ -36,24 +36,25 @@ public class PersonAction : GameAction
 
             if(!check)
             {
-                message = "You're missing resources! \n" + message;
+                message = string.Format($"<color={GameAction.okColor}>You're missing resources! \n {message}") ;
                 return false;
             }
             else
             {
-                message = actionDescription + "\n" + message;
+                message = string.Format($"<color={GameAction.okColor}>{actionDescription}\n") + message;
             }
             return true;
         }
         else
         {
-            message = "Object is not a person";
+            message = string.Format($"<color={GameAction.errorColor}>Object is not a person");
             return false;
         }
     }
 
     public override void Interact(AreaInteractable interactable)
     {
+        base.Interact(interactable);
         Person person = interactable as Person;
         if(person)
         {

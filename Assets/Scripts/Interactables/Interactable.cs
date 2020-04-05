@@ -71,10 +71,18 @@ public class Interactable : MonoBehaviour
     }
     public virtual void Start()
     {
-        
+        GameManager.instance.OnTickPass += TimePass;
+    }
+    public virtual void TimePass(int amount)
+    {
+
     }
     public virtual void OnValidate()
     {
 
+    }
+    private void OnDestroy()
+    {
+        GameManager.instance.OnTickPass -= TimePass;
     }
 }

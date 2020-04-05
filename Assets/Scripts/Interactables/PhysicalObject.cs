@@ -5,11 +5,14 @@ using UnityEngine;
 public class PhysicalObject : Interactable
 {
     [SerializeField]
+    float followSpeed = 0.2f;
+    [SerializeField]
     float dragOnPicked;
     [SerializeField]
     float dragNormal;
 
     protected Rigidbody2D rb;
+    Vector3 velocity;
 
     public override void Awake()
     {
@@ -22,19 +25,13 @@ public class PhysicalObject : Interactable
         base.FixedUpdate();
         if(pickedUp)
         {
-            rb.AddForce(GetBeamForce());
-            rb.drag = dragOnPicked * PlayerController.DragOnDistance.Evaluate(Distance()) * 1.00f;
+            rb.MovePosition(Vector3.Lerp(transform.position,cursorPosition,followSpeed));
         }
     }
     public override void OnLetGo()
     {
         base.OnLetGo();
         rb.drag = dragNormal;
-    }
-
-    public override void OnValidate()
-    {
-        GetComponent<Rigidbody2D>().drag = dragNormal;
     }
 
     public Vector3 GetBeamForce()

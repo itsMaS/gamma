@@ -436,7 +436,7 @@ SortingGroup:
   m_GameObject: {fileID: 2224214887170861197}
   m_Enabled: 1
   m_SortingLayerID: -309065047
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
 --- !u!114 &8479661681168603190
 MonoBehaviour:
@@ -454,6 +454,7 @@ MonoBehaviour:
   areaInfo: {fileID: 0}
   actions: {fileID: 6835773138978931800}
   RoomName: 
+  dropPoint: {fileID: 0}
   Ingredients: []
   Meals: []
 --- !u!1 &2657810935526423918

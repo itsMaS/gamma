@@ -5,6 +5,9 @@ using UnityEngine;
 public class Outside : AreaRoom
 {
     [SerializeField]
+    Transform dropPoint;
+
+    [SerializeField]
     GameObject[] Ingredients;
     [SerializeField]
     GameObject[] Meals;
@@ -18,16 +21,16 @@ public class Outside : AreaRoom
         Instantiate(Meals[Random.Range(0, Meals.Length)], position, Quaternion.identity);
     }
 
-    public void SpawnIngredients(int count, Vector3 location)
+    public void SpawnIngredients(int count)
     {
-        StartCoroutine(SpawnRandom(count,location));
+        StartCoroutine(SpawnRandom(count));
     }
 
-    IEnumerator SpawnRandom(int count, Vector3 spawnLocation)
+    IEnumerator SpawnRandom(int count)
     {
         for (int i = 0; i < count; i++)
         {
-            SpawnIngredient(spawnLocation + new Vector3(Random.Range(-20,20), Random.Range(-20, 20), 0));
+            SpawnIngredient(dropPoint.position + new Vector3(Random.Range(-5,5), Random.Range(-5, 5), 0));
             yield return new WaitForSeconds(0.3f);
         }
     }

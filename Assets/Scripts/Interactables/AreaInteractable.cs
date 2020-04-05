@@ -8,15 +8,24 @@ public class AreaInteractable : PhysicalObject
     public List<ActionGroup> ActionGroups;
 
     Area insideArea;
+    bool interacting = false;
+
+    public void SetInteracting(bool interacting)
+    {
+        this.interacting = interacting;
+    }
 
     public override void OnPickup()
     {
-        base.OnPickup();
-        GameEvents.instance.ShowActions(this);
+        if(!interacting)
+        {
+            base.OnPickup();
+            GameEvents.instance.ShowActions(this);
+        }
     }
     public override void OnLetGo()
     {
-        if(insideArea)
+        if (insideArea)
         {
             insideArea.Interact(this);
         }
@@ -37,7 +46,6 @@ public class AreaInteractable : PhysicalObject
         {
 
             collision.GetComponent<Area>().Unhover();
-            insideArea = null;
         }
     }
 }

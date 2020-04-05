@@ -41,9 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Wall
-    uniqueID: 679664329
-    locked: 0
   - name: ChildArea
     uniqueID: 1031181341
     locked: 0
@@ -58,4 +55,13 @@ TagManager:
     locked: 0
   - name: Areas
     uniqueID: 3985902249
+    locked: 0
+  - name: Items
+    uniqueID: 3478121165
+    locked: 0
+  - name: Wall
+    uniqueID: 679664329
+    locked: 0
+  - name: Cursor
+    uniqueID: 4016447315
     locked: 0

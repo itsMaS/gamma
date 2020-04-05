@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class AreaAction : Area
 {
+    bool interacted = false;
+
     static AreaAction current;
 
     public GameAction action;
@@ -12,7 +14,7 @@ public class AreaAction : Area
     public override void OnValidate()
     {
         base.OnValidate();
-        if(action != null)
+        if (action != null)
         {
             GetComponent<AreaVisual>().SetAreaName(action.name);
             gameObject.name = action.name;
@@ -40,19 +42,20 @@ public class AreaAction : Area
 
     public override bool Accept(AreaInteractable item, out string message)
     {
-         return action.Doable(item, out message);
+        return action.Doable(item, out message);
     }
 
     public override void Interacted(AreaInteractable item)
     {
         base.Interacted(item);
+        interacted = true;
         action.Interact(item);
     }
 
     public override bool Hover(AreaInteractable item)
     {
         visual.InflateMessage();
-        if(current && this != current)
+        if (current && this != current)
         {
             current.Unhover();
         }
@@ -70,10 +73,38 @@ public class AreaAction : Area
         base.HoverDeny();
     }
 
+    public void DisableSelf()
+    {
+        gameObject.SetActive(false);
+
+        /*
+        if (interacted)
+        {
+            GetComponent<LayoutElement>().ignoreLayout = true;
+            StartCoroutine(DelayDisable());
+        }
+        else
+        {
+            GetComponent<LayoutElement>().ignoreLayout = false;
+            gameObject.SetActive(false);
+        }
+        */
+    }
+    public void EnableSelf()
+    {
+        GetComponent<LayoutElement>().ignoreLayout = false;
+        gameObject.SetActive(true);
+    }
     IEnumerator SetLayoutWait()
     {
         yield return null;
         yield return new WaitForEndOfFrame();
         SetLayout();
+    }
+    IEnumerator DelayDisable()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        interacted = false;
+        DisableGameObject();
     }
 }

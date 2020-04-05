@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     Interactable current;
     Interactable next;
 
+    Vector3 cursorWorldPosition;
+
     private void Awake()
     {
         cam = FindObjectOfType<Camera>();
@@ -36,13 +38,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         cam.transform.Translate(cameraSensitivity*new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0));
+        cursorWorldPosition = Vector3.ProjectOnPlane(cam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
     }
 
     private void FixedUpdate()
     {
         SetPlayerSettings();
-
-        Vector3 cursorWorldPosition = Vector3.ProjectOnPlane(cam.ScreenToWorldPoint(Input.mousePosition),Vector3.forward);
 
         RaycastHit2D hit = Physics2D.Raycast(cursorWorldPosition, Vector2.zero,100,interactionMask);
         if (!heldIneractable && hit.collider != null && (next = hit.collider.GetComponent<Interactable>()))

@@ -23,18 +23,23 @@ public class OutsideAction : PersonAction
         }
     }
 
-    public override void Interact(AreaInteractable interactable)
+    public override void ActionFinished()
     {
+        base.ActionFinished();
         switch (actionType)
         {
             case Type.ScavengeForFood:
-                room.SpawnIngredients(3,interactable.transform.position);
+                room.SpawnIngredients(3);
                 break;
             case Type.ScavengeForMedicine:
                 break;
             default:
                 break;
         }
+    }
+
+    public override void Interact(AreaInteractable interactable)
+    {
         base.Interact(interactable);
     }
 }

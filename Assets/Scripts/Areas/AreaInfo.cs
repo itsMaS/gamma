@@ -49,6 +49,7 @@ public class AreaInfo : Area
     public override void Start()
     {
         base.Start();
+        visual.SetColor(GetComponentInParent<AreaRoom>().visual.areaColor);
     }
 
     public override void Show()

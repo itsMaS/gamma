@@ -27,6 +27,14 @@ public class AreaRoom : Area
 
     }
 
+    public override bool Accept(AreaInteractable item, out string message)
+    {
+        message = "";
+        return false;
+
+        return base.Accept(item, out message);
+    }
+
     public override void Start()
     {
         base.Start();
@@ -49,7 +57,7 @@ public class AreaRoom : Area
             {
                 if (group.AvailableActions.Contains(item.action))
                 {
-                    item.gameObject.SetActive(true);
+                    item.EnableSelf();
                     item.action.Initialize(this,item);
                     item.UpdateLayout();
                     areaUsed = true;
@@ -65,7 +73,7 @@ public class AreaRoom : Area
     {
         foreach (var item in Actions)
         {
-            item.gameObject.SetActive(false);
+            item.DisableSelf();
         }
         Hide();
     }

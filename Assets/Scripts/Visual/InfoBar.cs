@@ -11,6 +11,11 @@ public class InfoBar : MonoBehaviour
     [SerializeField]
     Person person;
 
+    private void Start()
+    {
+        GameManager.instance.OnTickPassVisual += UpdateInfo;
+    }
+
     private void Update()
     {
         string textBuffer = "";
@@ -21,5 +26,10 @@ public class InfoBar : MonoBehaviour
 
 
         info.text = textBuffer;
+    }
+
+    void UpdateInfo()
+    {
+
     }
 }

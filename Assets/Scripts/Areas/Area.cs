@@ -59,7 +59,6 @@ public class Area : MonoBehaviour
     }
     public virtual void Interacted(AreaInteractable item)
     {
-        an.SetTrigger("Interact");
     }
 
     public virtual bool Accept(AreaInteractable item, out string message)
@@ -87,7 +86,7 @@ public class Area : MonoBehaviour
             area.SetActive(false);
         }
     }
-    public virtual void EnableGameOBject()
+    public virtual void EnableGameObject()
     {
         area.SetActive(true);
     }
