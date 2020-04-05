@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Areas
+  - Walls
+  - Free
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Wall
+    uniqueID: 679664329
+    locked: 0
+  - name: ChildArea
+    uniqueID: 1031181341
+    locked: 0
+  - name: BaseArea
+    uniqueID: 1210702527
+    locked: 0
+  - name: Background
+    uniqueID: 4218081269
+    locked: 0
+  - name: Foreground
+    uniqueID: 3753921333
+    locked: 0
+  - name: Areas
+    uniqueID: 3985902249
+    locked: 0
