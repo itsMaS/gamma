@@ -9,10 +9,7 @@ public class GameEvents : MonoBehaviour
 
     private void Awake()
     {
-        if(!instance)
-        {
-            instance = this;
-        }       
+        instance = this;
     }
 
     public Action<AreaInteractable> OnShowActions;
@@ -30,6 +27,15 @@ public class GameEvents : MonoBehaviour
         if (OnHideAreas != null)
         {
             OnHideAreas();
+        }
+    }
+
+    public Action<string> OnGameOver;
+    public void GameOver(string reason)
+    {
+        if (OnGameOver != null)
+        {
+            OnGameOver(reason);
         }
     }
 }

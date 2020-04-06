@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class FoodIngredient : AreaInteractable
 {
+    public string foodName;
     public int nutritionValue;
 }

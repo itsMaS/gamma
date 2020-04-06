@@ -8,9 +8,9 @@ public class AreaInteractable : PhysicalObject
     public List<ActionGroup> ActionGroups;
 
     Area insideArea;
-    bool interacting = false;
+    protected bool interacting = false;
 
-    public void SetInteracting(bool interacting)
+    public virtual void SetInteracting(bool interacting)
     {
         this.interacting = interacting;
     }
@@ -20,6 +20,7 @@ public class AreaInteractable : PhysicalObject
         if(!interacting)
         {
             base.OnPickup();
+            AudioManager.Play("Pickup",0.5f);
             GameEvents.instance.ShowActions(this);
         }
     }
@@ -32,20 +33,36 @@ public class AreaInteractable : PhysicalObject
         base.OnLetGo();
         GameEvents.instance.HideAreas();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    public override void Interact(Area area)
+    {
+        AudioManager.PlayWithPitchDeviation("Insert",0.8f,0.3f);
+        PlayerController.Shake(2);
+        base.Interact(area);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(PlayerController.heldIneractable == this)
         {
-            insideArea = collision.GetComponent<Area>();
-            insideArea.Hover(this);
+            Area area = collision.GetComponent<Area>();
+            if (area as AreaAction)
+            {
+                insideArea = area;
+            }
+            area.Hover(this);
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (PlayerController.heldIneractable == this)
         {
-
-            collision.GetComponent<Area>().Unhover();
+            Area area = collision.GetComponent<Area>();
+            area.Unhover();
+            if(area as AreaAction && insideArea == area)
+            {
+                insideArea = null;
+            }
         }
     }
 }

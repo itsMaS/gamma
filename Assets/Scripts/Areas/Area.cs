@@ -28,6 +28,10 @@ public class Area : MonoBehaviour
     public virtual bool Hover(AreaInteractable item)
     {
         an.SetBool("Hover", true);
+        if (an.GetBool("Hover"))
+        {
+
+        }
         if (Accept(item, out string mesg))
         {
             visual.SetAreaMessage(mesg);
@@ -47,7 +51,7 @@ public class Area : MonoBehaviour
     }
     public void Interact(AreaInteractable item)
     {
-        if(Accept(item, out string no))
+        if (Accept(item, out string no))
         {
             Interacted(item);
             item.Interact(this);
@@ -71,21 +75,25 @@ public class Area : MonoBehaviour
     }
     public virtual void HoverDeny()
     {
-        visual.PingText();
+        if (!an.GetBool("Hover"))
+        {
+            visual.PingText();
+        }
     }
 
     public virtual void InteractDeny()
     {
+        PlayerController.Shake(1);
+        AudioManager.Play("Deny",0.8f);
+        GameManager.MakePopup(string.Format($"<color={GameAction.errorColor}> Action cannot be done."),transform.position);
         visual.PingText();
     }
 
     public virtual void DisableGameObject()
     {
-        if(!an.GetBool("Show"))
-        {
-            area.SetActive(false);
-        }
+        area.SetActive(false);
     }
+
     public virtual void EnableGameObject()
     {
         area.SetActive(true);

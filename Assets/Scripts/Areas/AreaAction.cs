@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class AreaAction : Area
 {
+    [SerializeField]
+    Image img;
+
     bool interacted = false;
 
     static AreaAction current;
-
     public GameAction action;
+
+    bool hovered;
 
     public override void OnValidate()
     {
@@ -54,6 +58,7 @@ public class AreaAction : Area
 
     public override bool Hover(AreaInteractable item)
     {
+
         visual.InflateMessage();
         if (current && this != current)
         {

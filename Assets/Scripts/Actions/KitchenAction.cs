@@ -26,7 +26,6 @@ public class KitchenAction : PersonAction
 
     public override void ActionFinished()
     {
-        base.ActionFinished();
         switch (actionType)
         {
             case Type.WashDishes:
@@ -43,12 +42,14 @@ public class KitchenAction : PersonAction
                 room.ingredients -= mealCost;
                 break;
             case Type.AddIngredients:
+                GameManager.MakePopup(($"<color={GameAction.bonusColor}>+{(currentInteractable as FoodIngredient).nutritionValue} food ingredients."), currentInteractable.transform.position);
                 room.AddIngredients((currentInteractable as FoodIngredient).nutritionValue);
                 Destroy(currentInteractable.gameObject);
                 break;
             default:
                 break;
         }
+        base.ActionFinished();
     }
 
     public override bool Doable(AreaInteractable interactable, out string message)
@@ -112,12 +113,12 @@ public class KitchenAction : PersonAction
                             return false;
                         }
 
-                        message = string.Format($"<color={GameAction.okColor}>+{ingredient.nutritionValue-waste} ingredients.");
+                        message = string.Format($"<color={GameAction.okColor}>{ingredient.foodName} +{ingredient.nutritionValue-waste} ingredients.");
                         message += string.Format($"<color={GameAction.errorColor}> \n -{waste} Wasted");
                     }
                     else
                     {
-                        message = string.Format($"<color={GameAction.okColor}>+{ingredient.nutritionValue} food ingredients.");
+                        message = string.Format($"<color={GameAction.okColor}>{ingredient.foodName} +{ingredient.nutritionValue} food ingredients.");
                     }
                     return true;
                 }

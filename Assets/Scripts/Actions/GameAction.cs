@@ -9,6 +9,7 @@ public abstract class GameAction : ScriptableObject
 
     public static string errorColor;
     public static string okColor;
+    public static string bonusColor;
 
     public string doingPhrase;
     public int time;
@@ -17,7 +18,7 @@ public abstract class GameAction : ScriptableObject
     public virtual void Interact(AreaInteractable interactable)
     {
         currentInteractable = interactable;
-        if (time >= 0)
+        if (time > 0)
         {
             interactable.SetInteracting(true);
             GameManager.instance.StartTime(time, ActionFinished);
@@ -31,6 +32,7 @@ public abstract class GameAction : ScriptableObject
 
     public virtual void ActionFinished()
     {
+        AudioManager.Play("Complete");
         currentInteractable.SetInteracting(false);
         currentInteractable = null;
     }

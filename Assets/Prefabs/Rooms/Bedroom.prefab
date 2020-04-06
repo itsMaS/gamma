@@ -1050,7 +1050,7 @@ PrefabInstance:
     - target: {fileID: 1121371503987511381, guid: 3e1b76725e9badf4e8b9cc5bc79a8629,
         type: 3}
       propertyPath: m_text
-      value: Sleep for 3h
+      value: Sleep for 4h
       objectReference: {fileID: 0}
     - target: {fileID: 1121371503987511381, guid: 3e1b76725e9badf4e8b9cc5bc79a8629,
         type: 3}
@@ -1095,7 +1095,7 @@ PrefabInstance:
     - target: {fileID: 2039178729499792224, guid: 3e1b76725e9badf4e8b9cc5bc79a8629,
         type: 3}
       propertyPath: m_Name
-      value: Sleep for 3h
+      value: Sleep for 4h
       objectReference: {fileID: 0}
     - target: {fileID: 2039178729499792225, guid: 3e1b76725e9badf4e8b9cc5bc79a8629,
         type: 3}
@@ -1371,7 +1371,7 @@ PrefabInstance:
     - target: {fileID: 1121371503987511381, guid: 3e1b76725e9badf4e8b9cc5bc79a8629,
         type: 3}
       propertyPath: m_text
-      value: Sleep for 9h
+      value: Sleep for 8h
       objectReference: {fileID: 0}
     - target: {fileID: 1324587410115411305, guid: 3e1b76725e9badf4e8b9cc5bc79a8629,
         type: 3}
@@ -1411,7 +1411,7 @@ PrefabInstance:
     - target: {fileID: 2039178729499792224, guid: 3e1b76725e9badf4e8b9cc5bc79a8629,
         type: 3}
       propertyPath: m_Name
-      value: Sleep for 9h
+      value: Sleep for 8h
       objectReference: {fileID: 0}
     - target: {fileID: 2039178729499792225, guid: 3e1b76725e9badf4e8b9cc5bc79a8629,
         type: 3}

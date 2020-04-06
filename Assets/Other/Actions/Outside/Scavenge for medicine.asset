@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88190e2e120291c4581cf024fb84b396, type: 3}
   m_Name: Scavenge for medicine
   m_EditorClassIdentifier: 
-  doingPhrase: 
-  time: 5
+  doingPhrase: Scavenging
+  time: 40
   AttributeValues:
   - type: 0
     netAmount: -10
   - type: 1
     netAmount: -30
-  actionDescription: Find some food
-  actionType: 0
+  actionDescription: Find some medicine
+  actionType: 1

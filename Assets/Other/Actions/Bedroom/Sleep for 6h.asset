@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f35909f3c84b3e8438bc10f0baf0fbb1, type: 3}
   m_Name: Sleep for 6h
   m_EditorClassIdentifier: 
+  doingPhrase: 
+  time: 24
   AttributeValues:
   - type: 1
     netAmount: 50
-  actionDescription: Restores your energy.
+  actionDescription: Refreshing but short.
   sleepAmount: 0

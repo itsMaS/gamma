@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93a077fc207f1a4d8d943fd0b51a289, type: 3}
   m_Name: Eat raw ingredients
   m_EditorClassIdentifier: 
+  doingPhrase: 
+  time: 5
   AttributeValues:
   - type: 0
-    netAmount: -5
+    netAmount: -20
   - type: 1
     netAmount: -10
   - type: 2
-    netAmount: 10
+    netAmount: 7
   actionDescription: Consumes food ingredients with lower nutrition.
   actionType: 2

@@ -18,9 +18,11 @@ public class PersonAction : GameAction
     [Multiline]
     [SerializeField]
     string actionDescription;
+    string lastNetResources;
 
     public override bool Doable(AreaInteractable interactable , out string message)
     {
+        currentInteractable = interactable;
         Person person = interactable as Person;
         if(person)
         {
@@ -33,8 +35,11 @@ public class PersonAction : GameAction
                     check = false;
                 }
             }
+            lastNetResources = message;
+            message += string.Format($"<color={GameAction.okColor}> {time}{"<sprite=3>"}   ");
 
-            if(!check)
+
+            if (!check)
             {
                 message = string.Format($"<color={GameAction.okColor}>You're missing resources! \n {message}") ;
                 return false;
@@ -55,9 +60,11 @@ public class PersonAction : GameAction
     public override void Interact(AreaInteractable interactable)
     {
         base.Interact(interactable);
+        GameManager.MakePopup(lastNetResources, interactable.transform.position);
         Person person = interactable as Person;
         if(person)
         {
+            person.progressBar.StartCount(time,this);
             foreach (var item in AttributeValues)
             {
                 person.Attributes[item.type] = Mathf.Clamp(person.Attributes[item.type] + item.netAmount, 0,100);
@@ -69,19 +76,19 @@ public class PersonAction : GameAction
     {
         if(netValue > 0)
         {
-            mesg += string.Format($"<color={GameAction.okColor}> +{netValue} {iconCode}   ");
+            mesg += string.Format($"<color={GameAction.okColor}> +{netValue}{iconCode}   ");
             return true;
         }
         else if(netValue < 0)
         {
             if(person >= -netValue)
             {
-                mesg += string.Format($"<color={GameAction.okColor}> {netValue} {iconCode}   ");
+                mesg += string.Format($"<color={GameAction.okColor}> {netValue}{iconCode}   ");
                 return true;
             }
             else
             {
-                mesg += string.Format($"<color={GameAction.errorColor}> {netValue} {iconCode}   ");
+                mesg += string.Format($"<color={GameAction.errorColor}> {netValue}{iconCode}   ");
                 return false;
             }
         }

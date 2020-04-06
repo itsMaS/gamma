@@ -5,7 +5,7 @@ using UnityEngine;
 public class PhysicalObject : Interactable
 {
     [SerializeField]
-    float followSpeed = 0.2f;
+    protected float followSpeed = 0.2f;
     [SerializeField]
     float dragOnPicked;
     [SerializeField]
@@ -44,5 +44,10 @@ public class PhysicalObject : Interactable
     float Distance()
     {
         return Vector3.Distance(cursorPosition, transform.position);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        AudioManager.PlayWithPitchDeviation("Hit",0.2f,0.2f);
     }
 }

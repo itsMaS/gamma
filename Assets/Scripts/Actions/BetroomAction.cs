@@ -20,6 +20,12 @@ public class BetroomAction : PersonAction
 
     public override bool Doable(AreaInteractable interactable, out string message)
     {
+        Person person = interactable as Person;
+        if(person && person.Attributes[Person.AttributeTypes.Energy] > 50)
+        {
+            message = string.Format($"<color={GameAction.errorColor}>You are not tired [<sprite=1>>50]");
+            return false;
+        }
         return base.Doable(interactable, out message);
     }
     public override void Interact(AreaInteractable interactable)

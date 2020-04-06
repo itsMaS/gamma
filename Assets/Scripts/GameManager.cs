@@ -19,25 +19,31 @@ public class GameManager : MonoBehaviour
     public PersonAttribute[] AttributesConstructor;
 
     [SerializeField]
+    GameObject popup;
+
+    [SerializeField]
     Color errorColor;
     [SerializeField]
     Color okColor;
+    [SerializeField]
+    Color bonusColor;
     [SerializeField]
     TMP_FontAsset font;
 
     private void Awake()
     {
-        if(!instance)
-        {
-            instance = this;
-        }
+        instance = this;
+        Person.AttributeIconCodes.Clear();
         foreach (var item in AttributesConstructor)
         {
             Person.AttributeIconCodes.Add(item.attributeType,item.attributeIconCode);
         }
         GameAction.errorColor = "#"+ColorUtility.ToHtmlStringRGBA(errorColor);
         GameAction.okColor = "#"+ColorUtility.ToHtmlStringRGBA(okColor);
+        GameAction.bonusColor = "#"+ColorUtility.ToHtmlStringRGBA(bonusColor);
     }
+
+    public int dayLength = 100;
 
     private void Start()
     {
@@ -80,6 +86,7 @@ public class GameManager : MonoBehaviour
         StopCoroutine(TimeControl());
     }
 
+    public int day;
     int elapsedTicks;
     int targetTicks;
 
@@ -96,13 +103,21 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    public static void MakePopup(string message,Vector3 position)
+    {
+        Instantiate(GameManager.instance.popup, position, Quaternion.identity).GetComponent<Popup>().Initialize(message);
+    }
+
+
     void TrackTime()
     {
         elapsedTicks += tickSize;
-        if(elapsedTicks >= targetTicks)
+        if(elapsedTicks > targetTicks)
         {
             StopTime();
         }
+
+        /*
         else
         {
             if((elapsedTicks + tickSize) > targetTicks)
@@ -110,12 +125,17 @@ public class GameManager : MonoBehaviour
                 tickSize = targetTicks - elapsedTicks;
             }
         }
+        */
 
         foreach (var item in TrackedActions.FindAll(e => (e.finishTime <= TotalTime)))
         {
             item.OnComplete();
         }
         TrackedActions.RemoveAll(e => (e.finishTime <= TotalTime));
+
+        day = TotalTime / dayLength;
+        FindObjectOfType<DayFader>().SetDay(day);
+
     }
 
     public int TotalTime { get; private set; }
@@ -131,10 +151,10 @@ public class GameManager : MonoBehaviour
         while(ticking)
         {
             yield return new WaitForSecondsRealtime(tickTime);
-            if (OnTickPass != null) { OnTickPass(tickSize); }
             TotalTime += tickSize;
+            if (OnTickPass != null) { OnTickPass(tickSize); }
             yield return null;
-            if (OnTickPass != null) { OnTickPassVisual(); }
+            if (OnTickPassVisual != null) { OnTickPassVisual(); }
             TrackTime();
         }   
     }

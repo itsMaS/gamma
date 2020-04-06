@@ -114,8 +114,8 @@ public class AreaVisual : MonoBehaviour
     }
     public void PingText()
     {
-        areaName.transform.LeanScale(Vector3.one * 1.1f,0.1f).setLoopPingPong(1);
-        areaMessage.transform.LeanScale(Vector3.one * 1.1f,0.1f).setLoopPingPong(1);
+        //areaName.transform.LeanScale(Vector3.one * 1.1f,0.1f).setLoopPingPong(1);
+        //areaMessage.transform.LeanScale(Vector3.one * 1.1f,0.1f).setLoopPingPong(1);
     }
     public void InflateMessage()
     {
